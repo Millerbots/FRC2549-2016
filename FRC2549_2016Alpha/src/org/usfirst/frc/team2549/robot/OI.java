@@ -1,7 +1,8 @@
 package org.usfirst.frc.team2549.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team2549.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2549.robot.util.DriveJoystickCollection;
+
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -34,5 +35,10 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	
+	public Joystick joystick1 = new Joystick(0);
+	public Joystick joystick2 = new Joystick(1);
+	
+	public DriveJoystickCollection driveSticks = new DriveJoystickCollection(joystick1, joystick2); // Group of joysticks for driving
 }
 
