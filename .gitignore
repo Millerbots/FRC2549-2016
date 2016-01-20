@@ -13,3 +13,7 @@ hs_err_pid*
 
 .metadata
 example
+.recommenders
+.classpath
+.project
+build*
