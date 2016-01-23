@@ -14,6 +14,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	public DrivetrainSubsystem(){
 		leftMotor = RobotMap.leftDriveMotor.getController();
 		rightMotor = RobotMap.rightDriveMotor.getController();
+		rightMotor.setInverted(true);
 	}
 
 	protected void initDefaultCommand() {

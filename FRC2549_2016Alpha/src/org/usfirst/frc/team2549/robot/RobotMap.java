@@ -19,6 +19,7 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	public static final MotorDescriptor leftDriveMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kJaguar, 1);
-	public static final MotorDescriptor rightDriveMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kJaguar, 2);
+	public static final MotorDescriptor leftDriveMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kJaguar, 0);
+	public static final MotorDescriptor rightDriveMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kJaguar, 1);
+	public static final int[] pusherChannels = {0,1};
 }

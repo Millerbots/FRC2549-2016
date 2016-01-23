@@ -17,7 +17,7 @@ public class MotorDescriptor {
 	
 	public MotorDescriptor(SpeedControllerTypes type, int indexedPWMChannel){
 		this.speedControllerType = type;
-		this.PWMChannel = indexedPWMChannel - 1;
+		this.PWMChannel = indexedPWMChannel;
 	}
 	
 	public SpeedController getController(){
