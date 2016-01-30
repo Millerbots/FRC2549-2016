@@ -37,8 +37,5 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public Joystick joystick1 = new Joystick(0);
-	public Joystick joystick2 = new Joystick(1);
-	
-	public DriveJoystickCollection driveSticks = new DriveJoystickCollection(joystick1, joystick2); // Group of joysticks for driving
 }
 

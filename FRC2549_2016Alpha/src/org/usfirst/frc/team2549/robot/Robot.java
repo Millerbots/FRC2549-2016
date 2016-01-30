@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2549.robot.commands.AutoCommand;
 import org.usfirst.frc.team2549.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2549.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.ShooterSubsystem;
@@ -27,10 +28,10 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+	public static final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 	public static OI oi;
 
     Command autonomousCommand;
-    SendableChooser chooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -38,10 +39,6 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
     }
 	
 	/**
@@ -67,7 +64,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
