@@ -1,4 +1,7 @@
 package org.usfirst.frc.team2549.robot;
+
+import org.usfirst.frc.team2549.robot.util.MotorDescriptor;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -15,4 +18,10 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
+	
+	public static final MotorDescriptor leftDriveMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kTalon, 0);
+	public static final MotorDescriptor rightDriveMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kTalon, 1);
+	public static final MotorDescriptor liftMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kTalon, 2);
+	public static final MotorDescriptor wheelMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kTalon, 3);
+	public static final int[] pusherChannels = {0,1};
 }
