@@ -2,6 +2,7 @@ package org.usfirst.frc.team2549.robot.subsystems;
 
 import org.usfirst.frc.team2549.robot.RobotMap;
 import org.usfirst.frc.team2549.robot.commands.DriveCommand;
+import org.usfirst.frc.team2549.robot.util.MaxbotixMB1013;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -15,11 +16,17 @@ public class DrivetrainSubsystem extends Subsystem {
 	public Encoder testEncoder;
 	private RobotDrive drive;
 	
+	public MaxbotixMB1013 leftSonar;
+	public MaxbotixMB1013 rightSonar;
+	
 	public DrivetrainSubsystem(){
 		leftMotor = RobotMap.leftDriveMotor.getController();
 		rightMotor = RobotMap.rightDriveMotor.getController();
 		testEncoder = new Encoder(0,1);
 		drive = new RobotDrive(leftMotor, rightMotor);
+		
+		leftSonar=new MaxbotixMB1013(RobotMap.leftSonarPort);
+		rightSonar=new MaxbotixMB1013(RobotMap.rightSonarPort);
 	}
 
 	protected void initDefaultCommand() {

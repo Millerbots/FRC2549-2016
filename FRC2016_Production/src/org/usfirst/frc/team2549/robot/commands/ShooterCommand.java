@@ -19,9 +19,9 @@ public class ShooterCommand extends Command {
 	@Override
 	protected void execute() {
 		Robot.shooterSubsystem.setLifter(Robot.oi.joystick3.getY());
-		if (Robot.oi.joystick3.getRawButton(3)){
+		if (Robot.oi.joystick3.getRawButton(3) || Robot.oi.joystick2.getRawButton(3) || Robot.oi.joystick1.getRawButton(3)){
 			Robot.shooterSubsystem.setWheels(1);
-		}else if (Robot.oi.joystick3.getRawButton(2)){
+		}else if (Robot.oi.joystick3.getRawButton(2) || Robot.oi.joystick2.getRawButton(2) || Robot.oi.joystick1.getRawButton(2)){
 			Robot.shooterSubsystem.setWheels(-1);
 		}else{
 			Robot.shooterSubsystem.setWheels(0);
