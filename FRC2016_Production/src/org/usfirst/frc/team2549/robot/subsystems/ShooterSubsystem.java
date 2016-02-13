@@ -3,29 +3,39 @@ package org.usfirst.frc.team2549.robot.subsystems;
 import org.usfirst.frc.team2549.robot.RobotMap;
 import org.usfirst.frc.team2549.robot.commands.ShooterCommand;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
 public class ShooterSubsystem extends Subsystem {
-	
-	Compressor compressor;
-	DoubleSolenoid pusherPiston;
-	public Potentiometer testPot;
 	private SpeedController liftController;
 	private SpeedController wheelController;
 	
+	private AnalogGyro liftGyro;
+	
+	private DigitalInput limitSwitch;
+	
+	private double offset = 0.;
+	
 	public ShooterSubsystem(){
-		compressor = new Compressor(0);
-		compressor.start();
-		pusherPiston = new DoubleSolenoid(RobotMap.pusherChannels[0], RobotMap.pusherChannels[1]);
-		testPot = new AnalogPotentiometer(2, 360, 0);
-		
 		liftController=RobotMap.liftMotor.getController();
 		wheelController=RobotMap.wheelMotor.getController();
+		
+		liftGyro = new AnalogGyro(RobotMap.analogGyroPort);
+		liftGyro.reset();
+		liftGyro.setSensitivity(0.007);
+		
+		limitSwitch = new DigitalInput(RobotMap.limitSwitch);
+	}
+	
+	public boolean getLimitSwitchValue(){
+		return !limitSwitch.get();
 	}
 	
 	protected void initDefaultCommand() {
@@ -40,11 +50,19 @@ public class ShooterSubsystem extends Subsystem {
 		wheelController.set(value);
 	}
 	
-	public void openPiston(){
-		pusherPiston.set(DoubleSolenoid.Value.kForward);
+	public double getRawAngle(){
+		return liftGyro.getAngle();
 	}
 	
-	public void closePiston(){
-		pusherPiston.set(DoubleSolenoid.Value.kReverse);
+	public double getAngle(){
+		return getRawAngle()-offset;
+	}
+	
+	public double getGyroOffset(){
+		return offset;
+	}
+	
+	public void resetGyro(){
+		offset=getRawAngle();
 	}
 }

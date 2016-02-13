@@ -13,7 +13,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	private SpeedController leftMotor;
 	private SpeedController rightMotor;
-	public Encoder testEncoder;
 	private RobotDrive drive;
 	
 	public MaxbotixMB1013 leftSonar;
@@ -22,7 +21,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	public DrivetrainSubsystem(){
 		leftMotor = RobotMap.leftDriveMotor.getController();
 		rightMotor = RobotMap.rightDriveMotor.getController();
-		testEncoder = new Encoder(0,1);
 		drive = new RobotDrive(leftMotor, rightMotor);
 		
 		leftSonar=new MaxbotixMB1013(RobotMap.leftSonarPort);
