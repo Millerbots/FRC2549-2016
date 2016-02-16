@@ -27,7 +27,7 @@ public class ShooterSubsystem extends Subsystem {
 		liftController=RobotMap.liftMotor.getController();
 		wheelController=RobotMap.wheelMotor.getController();
 		
-		liftGyro = new AnalogGyro(RobotMap.analogGyroPort);
+		liftGyro = new AnalogGyro(RobotMap.liftGyroPort);
 		liftGyro.reset();
 		liftGyro.setSensitivity(0.007);
 		

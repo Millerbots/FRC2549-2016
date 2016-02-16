@@ -25,9 +25,11 @@ public class RobotMap {
 	public static final MotorDescriptor wheelMotor = new MotorDescriptor(MotorDescriptor.SpeedControllerTypes.kTalon, 3);
 	public static final int[] pusherChannels = {0,1};
 	
-	public static final int analogGyroPort = 0;
-	public static final int leftSonarPort = 1;
-	public static final int rightSonarPort = 2;
+	public static final int liftGyroPort = 0;
+	public static final int driveGyroPort = 1;
 	
 	public static final int limitSwitch = 0;
+	
+	public static final int[] leftEncoder = {3, 4};
+	public static final int[] rightEncoder = {1, 2};
 }

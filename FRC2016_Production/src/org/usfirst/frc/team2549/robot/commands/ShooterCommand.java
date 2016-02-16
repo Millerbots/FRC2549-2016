@@ -14,29 +14,52 @@ public class ShooterCommand extends Command {
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void execute() {
-		if ((Robot.shooterSubsystem.getAngle()>30 && Robot.oi.joystick3.getY()<0) ||
-				(Robot.shooterSubsystem.getLimitSwitchValue() && Robot.oi.joystick3.getY()>0)){
-			Robot.shooterSubsystem.setLifter(0);
+//		if ((Robot.shooterSubsystem.getAngle()>85 && Robot.oi.joystick3.getY()<0) ||
+//				(Robot.shooterSubsystem.getLimitSwitchValue() && Robot.oi.joystick3.getY()>0)){
+//			Robot.shooterSubsystem.setLifter(0);
+//		}else{
+//			if(Robot.oi.joystick3.getY()<0 && Robot.shooterSubsystem.getAngle()>60){
+//				Robot.shooterSubsystem.setLifter(Robot.oi.joystick3.getY()*(1-((Robot.shooterSubsystem.getAngle()-60)*0.05)));
+//			}else{
+//				Robot.shooterSubsystem.setLifter(Robot.oi.joystick3.getY());
+//			}
+//		}
+		
+		if (Robot.oi.joystick1.getRawButton(3) || Robot.oi.joystick2.getRawButton(3)){
+			if(Robot.shooterSubsystem.getAngle()>60){
+				Robot.shooterSubsystem.setLifter((SmartDashboard.getDouble("AscentScale", -.6))*(1-((Robot.shooterSubsystem.getAngle()-60)*0.05)));
+			}else{
+				Robot.shooterSubsystem.setLifter(SmartDashboard.getDouble("AscentScale", -.6));
+			}
 		}else{
-			Robot.shooterSubsystem.setLifter(Robot.oi.joystick3.getY());
+			if(!Robot.shooterSubsystem.getLimitSwitchValue()){
+				if (Robot.shooterSubsystem.getAngle()<30){
+					Robot.shooterSubsystem.setLifter(SmartDashboard.getDouble("DescentBrakeScale", -.2));
+				}else{
+					Robot.shooterSubsystem.setLifter(SmartDashboard.getDouble("DescentScale", .1));
+				}
+			}else{
+				Robot.shooterSubsystem.setLifter(0);
+			}
 		}
 		
-		SmartDashboard.putDouble("JoystickValue", Robot.oi.joystick3.getY());
-		
-		if (Robot.oi.joystick3.getRawButton(3) || Robot.oi.joystick2.getRawButton(3) || Robot.oi.joystick1.getRawButton(3)){
+		if (Robot.oi.joystick1.getRawButton(1) || Robot.oi.joystick2.getRawButton(1)){
 			Robot.shooterSubsystem.setWheels(1);
-		}else if (Robot.oi.joystick3.getRawButton(2) || Robot.oi.joystick2.getRawButton(2) || Robot.oi.joystick1.getRawButton(2)){
+		}else if (Robot.oi.joystick1.getRawButton(2) || Robot.oi.joystick2.getRawButton(2)){
 			Robot.shooterSubsystem.setWheels(-1);
 		}else{
 			Robot.shooterSubsystem.setWheels(0);
 		}
 		
-		if (Robot.oi.joystick3.getRawButton(10) || Robot.oi.joystick2.getRawButton(10) || Robot.oi.joystick1.getRawButton(10)){
-			Robot.shooterSubsystem.resetGyro();
+		if (Robot.oi.joystick1.getRawButton(10) || Robot.oi.joystick2.getRawButton(10)){
+			SmartDashboard.putDouble("AscentScale", -.5);
+			SmartDashboard.putDouble("DescentScale", .1);
+			SmartDashboard.putDouble("DescentBrakeScale", -.085);
 		}
 		
 		if (Robot.shooterSubsystem.getLimitSwitchValue()){

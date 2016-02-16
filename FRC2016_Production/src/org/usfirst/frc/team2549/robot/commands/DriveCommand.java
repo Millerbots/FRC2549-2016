@@ -11,22 +11,33 @@ public class DriveCommand extends Command {
 		requires(Robot.drivetrainSubsystem);
 	}
 
-	protected void initialize() {}
+	protected void initialize() {
+		Robot.drivetrainSubsystem.accelerometer.initSampling();
+	}
 
-	@SuppressWarnings("deprecation")
 	protected void execute() {
+		Robot.drivetrainSubsystem.accelerometer.sample();
 		Robot.drivetrainSubsystem.tankDrive(Robot.oi.joystick1.getY(),
 				Robot.oi.joystick2.getY());
 		
-//		SmartDashboard.putDouble("Encoder_Distance", Robot.drivetrainSubsystem.testEncoder.getDistance());
-//		SmartDashboard.putBoolean("Encoder_Direction", Robot.drivetrainSubsystem.testEncoder.getDirection());
-//		SmartDashboard.putDouble("Encoder_Rate", Robot.drivetrainSubsystem.testEncoder.getRate());
-//		SmartDashboard.putDouble("Encoder_Raw", Robot.drivetrainSubsystem.testEncoder.getRaw());
+		if (Robot.oi.joystick1.getRawButton(7) || Robot.oi.joystick2.getRawButton(7)){
+			Robot.drivetrainSubsystem.leftEncoder.reset();
+			Robot.drivetrainSubsystem.rightEncoder.reset();
+			Robot.drivetrainSubsystem.accelerometer.reset();
+			Robot.drivetrainSubsystem.resetGyro();
+		}
 		
-		SmartDashboard.putDouble("leftSonarValue", Robot.drivetrainSubsystem.leftSonar.getVoltage());
-		SmartDashboard.putDouble("rightSonarValue", Robot.drivetrainSubsystem.rightSonar.getVoltage());
-		SmartDashboard.putDouble("leftSonarRaw", Robot.drivetrainSubsystem.leftSonar.getValue());
-		SmartDashboard.putDouble("rightSonarRaw", Robot.drivetrainSubsystem.rightSonar.getValue());
+		SmartDashboard.putNumber("leftEncoderDistance", Robot.drivetrainSubsystem.leftEncoder.getDistance());
+		SmartDashboard.putNumber("leftEncoderRate", Robot.drivetrainSubsystem.leftEncoder.getRate());
+		
+		SmartDashboard.putNumber("rightEncoderDistance", Robot.drivetrainSubsystem.rightEncoder.getDistance());
+		SmartDashboard.putNumber("rightEncoderRate", Robot.drivetrainSubsystem.rightEncoder.getRate());
+		
+		SmartDashboard.putNumber("offsetAvgAccelY", Robot.drivetrainSubsystem.accelerometer.getOffsetAvgY());
+		SmartDashboard.putNumber("velocityY_", Robot.drivetrainSubsystem.accelerometer.getVelocityY());
+		SmartDashboard.putNumber("positionY_", Robot.drivetrainSubsystem.accelerometer.getPositionY());
+		
+		SmartDashboard.putNumber("driveAngle", Robot.drivetrainSubsystem.getAngle());
 	}
 
 	protected boolean isFinished() {return false;}

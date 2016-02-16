@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2549.robot.commands.AutoCommand;
+import org.usfirst.frc.team2549.robot.commands.auto.AbsoluteOrientCommand;
+import org.usfirst.frc.team2549.robot.commands.auto.DriveDistanceCommand;
 import org.usfirst.frc.team2549.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.ExampleSubsystem;
@@ -60,21 +62,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-    	
-    	// schedule the autonomous command (example)
-//        if (autonomousCommand != null) autonomousCommand.start();
-        new AutoCommand().start();
+    	new AutoCommand().start();
     }
 
     /**
