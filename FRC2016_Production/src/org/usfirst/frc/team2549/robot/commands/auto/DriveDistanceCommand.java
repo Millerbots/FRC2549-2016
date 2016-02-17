@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveDistanceCommand extends Command {
 	double[] speed = {0.6, 0.6};
-	double[] correctSpeed = {0.6, 0.4};
+	double[] correctSpeed = {0.6, 0.5};
 	double[] targetDistance;
 	
 	public DriveDistanceCommand(double[] distance){
@@ -31,10 +31,10 @@ public class DriveDistanceCommand extends Command {
 	}
 
 	protected void execute() {
-		if ((Robot.drivetrainSubsystem.leftEncoder.getDistance()-Robot.drivetrainSubsystem.rightEncoder.getDistance())>30){
-			Robot.drivetrainSubsystem.tankDrive(correctSpeed[0], correctSpeed[1]);
-		}else if ((Robot.drivetrainSubsystem.rightEncoder.getDistance()-Robot.drivetrainSubsystem.leftEncoder.getDistance())>30){
+		if ((Robot.drivetrainSubsystem.leftEncoder.getDistance()-Robot.drivetrainSubsystem.rightEncoder.getDistance())>15){
 			Robot.drivetrainSubsystem.tankDrive(correctSpeed[1], correctSpeed[0]);
+		}else if ((Robot.drivetrainSubsystem.rightEncoder.getDistance()-Robot.drivetrainSubsystem.leftEncoder.getDistance())>15){
+			Robot.drivetrainSubsystem.tankDrive(correctSpeed[0], correctSpeed[1]);
 		}else{
 			Robot.drivetrainSubsystem.tankDrive(speed[0], speed[1]);
 		}

@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2549.robot.commands.AutoCommand;
-import org.usfirst.frc.team2549.robot.commands.auto.AbsoluteOrientCommand;
-import org.usfirst.frc.team2549.robot.commands.auto.DriveDistanceCommand;
 import org.usfirst.frc.team2549.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.ExampleSubsystem;
