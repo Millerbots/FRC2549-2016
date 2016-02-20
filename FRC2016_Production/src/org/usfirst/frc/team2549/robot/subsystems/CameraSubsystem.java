@@ -27,9 +27,14 @@ public class CameraSubsystem extends Subsystem {
 		try{
 			session = NIVision.IMAQdxOpenCamera("cam1",
 	                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-	        session2 = NIVision.IMAQdxOpenCamera("cam2",
-	                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-			server.setQuality(50);
+			try{
+		        session2 = NIVision.IMAQdxOpenCamera("cam2",
+		                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+			}catch(VisionException v){
+				session2 = NIVision.IMAQdxOpenCamera("cam0",
+		                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+			}
+		       server.setQuality(50);
 		}catch (VisionException v){broken=true;}
 	}
 	
