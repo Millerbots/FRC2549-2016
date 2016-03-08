@@ -1,4 +1,3 @@
-//Deez Nuts - Goteem
 package org.usfirst.frc.team2549.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -7,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2549.robot.commands.AutoCommand;
+import org.usfirst.frc.team2549.robot.commands.ShooterCommand;
 import org.usfirst.frc.team2549.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team2549.robot.subsystems.ExampleSubsystem;
@@ -60,6 +60,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+//    	Robot.shooterSubsystem.setLifter(0);
     	new AutoCommand().start();
     }
 
@@ -75,7 +76,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        new ShooterCommand().start();
     }
 
     /**

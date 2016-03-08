@@ -39,7 +39,7 @@ public class ShooterSubsystem extends Subsystem {
 	}
 	
 	protected void initDefaultCommand() {
-		setDefaultCommand(new ShooterCommand());
+//		setDefaultCommand(new ShooterCommand());
 	}
 	
 	public void setLifter(double value){
