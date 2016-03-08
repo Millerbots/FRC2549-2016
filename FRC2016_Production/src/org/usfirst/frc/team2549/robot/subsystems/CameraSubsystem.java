@@ -8,6 +8,7 @@ import com.ni.vision.VisionException;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CameraSubsystem extends Subsystem {
 	private CameraServer server;
@@ -35,7 +36,11 @@ public class CameraSubsystem extends Subsystem {
 		                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 			}
 		       server.setQuality(50);
-		}catch (VisionException v){broken=true;}
+		}catch (VisionException v){broken=true;pushError(v);}
+	}
+	
+	private void pushError(VisionException v){
+		SmartDashboard.putString("VisionError", v.getMessage()+" -- "+v.toString());
 	}
 	
 	private int getSession(boolean id){
@@ -51,7 +56,7 @@ public class CameraSubsystem extends Subsystem {
 			try{
 				NIVision.IMAQdxStopAcquisition(getCurrentSession());
 				NIVision.IMAQdxUnconfigureAcquisition(getCurrentSession());
-			}catch (VisionException v){broken=true;}
+			}catch (VisionException v){broken=true;pushError(v);}
 		}
 	}
 	
@@ -63,7 +68,7 @@ public class CameraSubsystem extends Subsystem {
 		        NIVision.IMAQdxStartAcquisition(getSession(id));
 		        initilizedCamera = id;
 		        doneInit=true;
-			}catch (VisionException v){broken=true;}
+			}catch (VisionException v){broken=true;pushError(v);}
 		}
 	}
 	
@@ -76,7 +81,7 @@ public class CameraSubsystem extends Subsystem {
 			try{
 				NIVision.IMAQdxGrab(getCurrentSession(), frame, 1);
 				server.setImage(frame);
-			}catch (VisionException v){broken=true;}
+			}catch (VisionException v){broken=true;pushError(v);}
 		}
 	}
 	

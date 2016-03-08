@@ -27,6 +27,17 @@ public class DriveCommand extends Command {
 			Robot.drivetrainSubsystem.resetGyro();
 		}
 		
+		if(Robot.oi.joystick1.getRawButton(6))
+		{
+			Robot.drivetrainSubsystem.forwards = true;
+			SmartDashboard.putBoolean("forwards", true);
+		}
+		else if(Robot.oi.joystick1.getRawButton(7))
+		{
+			Robot.drivetrainSubsystem.forwards = false;
+			SmartDashboard.putBoolean("forwards", false);
+		}
+		
 		SmartDashboard.putNumber("leftEncoderDistance", Robot.drivetrainSubsystem.leftEncoder.getDistance());
 		SmartDashboard.putNumber("leftEncoderRate", Robot.drivetrainSubsystem.leftEncoder.getRate());
 		

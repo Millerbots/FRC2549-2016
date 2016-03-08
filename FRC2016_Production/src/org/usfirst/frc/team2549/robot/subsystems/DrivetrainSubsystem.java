@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2549.robot.subsystems;
 
+import org.usfirst.frc.team2549.robot.Robot;
 import org.usfirst.frc.team2549.robot.RobotMap;
 import org.usfirst.frc.team2549.robot.commands.DriveCommand;
 import org.usfirst.frc.team2549.robot.util.IntegratedBuiltinAccelerometer;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DrivetrainSubsystem extends Subsystem {
 	
@@ -25,6 +27,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	private double offset = 0;
 	
+	public boolean forwards = true;
+		
 	public DrivetrainSubsystem(){
 		leftMotor = RobotMap.leftDriveMotor.getController();
 		rightMotor = RobotMap.rightDriveMotor.getController();
@@ -40,6 +44,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		driveGyro = new AnalogGyro(RobotMap.driveGyroPort);
 		driveGyro.reset();
 		driveGyro.setSensitivity(0.007);
+		
+		
 	}
 	
 	public double getRawAngle(){
@@ -77,6 +83,11 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 	
 	public void tankDrive(double left, double right){
-		drive.tankDrive(left, right);
+		if(forwards == true){
+			drive.tankDrive(left, right);
+		}else if(forwards == false){
+			drive.tankDrive(-left,-right);
+		}
+		
 	}
 }

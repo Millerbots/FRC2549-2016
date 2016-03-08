@@ -20,8 +20,8 @@ public class StreamCameraCommand extends Command {
 	@Override
 	protected void initialize() {
 		cameraChooser = new SendableChooser();
-		cameraChooser.addDefault("Back Camera", "cam1");
-		cameraChooser.addObject("Lift Camera", "cam2");
+		cameraChooser.addDefault("Lift Camera", "cam1");
+		cameraChooser.addObject("Back Camera", "cam2");
         SmartDashboard.putData("Camera", cameraChooser);
         String selectionString = (String)cameraChooser.getSelected();
 		boolean selection = false;
@@ -31,6 +31,7 @@ public class StreamCameraCommand extends Command {
 		Robot.cameraSubsystem.selectCamera(selection);
 	}
 
+	
 	@Override
 	protected void execute() {
 		try{
@@ -45,11 +46,21 @@ public class StreamCameraCommand extends Command {
 			selection = true;
 		}
 		
-		if (selection!=Robot.cameraSubsystem.getInitilizedCamera()){
+		/*if (selection!=Robot.cameraSubsystem.getInitilizedCamera()){
 			Robot.cameraSubsystem.selectCamera(selection);
 			Robot.cameraSubsystem.serveLatestFrame();
-		}
+		}*/
 		
+		if(Robot.oi.joystick1.getRawButton(4) || Robot.oi.joystick2.getRawButton(4))
+		{
+			Robot.cameraSubsystem.selectCamera(true);
+		}
+		else if(Robot.oi.joystick1.getRawButton(5) || Robot.oi.joystick2.getRawButton(5))
+		{
+			Robot.cameraSubsystem.selectCamera(false);
+		}
+			
+			
 		SmartDashboard.putString("Target XY", SmartDashboard.getString("DIAMOND_COORDINATES", "?"));
 	}
 
